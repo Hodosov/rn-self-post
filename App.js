@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import {AppNavigation} from './src/navigation/AppNavigation'
 import { AppLoading } from 'expo'
 import {bootstrap} from './src/bootstrap'
 
@@ -15,11 +16,8 @@ export default function App() {
       onError={err => console.log(err)} />
   }
 
-  return (
-    <View>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar />
-    </View>
-  );
+  return(
+    <AppNavigation />
+  ) 
 }
 
