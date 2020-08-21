@@ -8,16 +8,16 @@ import {Platform} from 'react-native'
 const PostNavigator = createStackNavigator({
     Main: { 
         screen: MainScreen,
-        navigationOptions: () => ({
-            headerTitle: 'Мой блог',
-          }),
+        // navigationOptions: () => ({
+        //     headerTitle: 'Мой блог',
+        //   }),
 
     },
     Post: {
         screen: PostScreen,
-        navigationOptions: () => ({
-            headerTitle: 'Пост номер 41',
-          }),
+        // navigationOptions: () => ({
+        //     headerTitle: 'Пост номер 41',
+        //   }),
     },
     initialRouteName: 'Main',
   }, {

@@ -5,8 +5,8 @@ import { DATA } from '../data'
 import { Post } from '../components/Post'
 
 export const MainScreen = ({ navigation }) => {
-    const goToPost = () => {
-        navigation.navigate('Post',)
+    const openPostHandler = (post) => {
+        navigation.navigate('Post', {postId: post.id, date: post.date})
     }
 
     return (
@@ -15,18 +15,16 @@ export const MainScreen = ({ navigation }) => {
                 data={DATA}
                 keyExtractor={post => post.id.toString()}
                 renderItem={({ item }) => {
-                return <Post post={item} />
+                return <Post post={item} onOpen={openPostHandler} />
                 }} />
         </View>
     )
 }
 
-// MainScreen.navigationOptions = {
-//     headerTitle: 'Мой блог',
-// headerStyle: {
-//         backgroundColor: THEME.MAIN_COLOR,
-//     },
-// }
+MainScreen.navigationOptions = {
+    headerTitle: 'Мой блог',
+    headerRight: <Text>Hello</Text>
+}
 
 const styles = StyleSheet.create({
     wrapper: {
