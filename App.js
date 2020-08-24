@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {AppNavigation} from './src/navigation/AppNavigation'
+import { Provider } from 'react-redux'
+import {store} from './src/store/index'
+import { AppNavigation } from './src/navigation/AppNavigation'
 import { AppLoading } from 'expo'
-import {bootstrap} from './src/bootstrap'
+import { bootstrap } from './src/bootstrap'
 
 export default function App() {
 
@@ -16,8 +16,10 @@ export default function App() {
       onError={err => console.log(err)} />
   }
 
-  return(
-    <AppNavigation />
-  ) 
+  return (
+    <Provider store={store}>
+      <AppNavigation />
+    </Provider>
+  )
 }
 
