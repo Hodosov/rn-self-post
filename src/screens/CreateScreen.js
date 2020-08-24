@@ -1,12 +1,21 @@
-import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import React, { useState } from 'react'
+import {View, Text, StyleSheet, TextInput} from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { AppHeaderIcon } from '../components/AppHeaderIcon'
 
 export const CreateScreen = () => {
+
+    const [text, setText] = useState('')
+
     return(
-        <View style={styles.center}>
-            <Text>Create Screen</Text>
+        <View style={styles.wrapper}>
+            <Text style={styles.title}>Создать новый пост</Text>
+            <TextInput
+                style={styles.textarea}
+                placeholder='Что у вас нового?'
+                value={text}
+                onChangeText={setText}
+            />
         </View>
     )
 }
@@ -23,9 +32,17 @@ CreateScreen.navigationOptions = ({navigation}) => ({
 })
 
 const styles = StyleSheet.create({
-    center: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+    wrapper: {
+        padding: 10
+    },
+    title: {
+        fontSize: 20,
+        textAlign: 'center',
+        fontFamily: 'open-regular',
+        marginVertical: 10
+    },
+    textarea: {
+        padding: 10,
+        marginBottom: 10
     }
 })
