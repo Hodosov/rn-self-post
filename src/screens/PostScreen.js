@@ -19,7 +19,6 @@ export const PostScreen = ({ navigation }) => {
     }, [booked])
 
     const toogleHandler = useCallback(() => {
-        console.log(postId)
         dispatch(toogleBooked(postId))
     }, [dispatch, postId])
 

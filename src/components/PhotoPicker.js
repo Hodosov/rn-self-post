@@ -15,7 +15,7 @@ async function askForPermissions() {
     return true
 }
 
-export const PhotoPicker = ({ }) => {
+export const PhotoPicker = ({ onPick }) => {
     const [image, setImage] = useState(null)
 
     const takePhoto = async () => {
@@ -25,13 +25,14 @@ export const PhotoPicker = ({ }) => {
             return
         }
 
-         const image = await ImagePicker.launchCameraAsync({
+         const img = await ImagePicker.launchCameraAsync({
             quality: 0.7,
             allowsEditing: false,
             aspect: [16, 9]
         })
 
-        setImage(image.uri)
+        setImage(img.uri)
+        onPick(img.uri)
     }
 
     return (

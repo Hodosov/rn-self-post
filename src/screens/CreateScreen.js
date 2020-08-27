@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { View, Text, StyleSheet, TextInput, Button, Image, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { AppHeaderIcon } from '../components/AppHeaderIcon'
@@ -12,19 +12,24 @@ export const CreateScreen = ({navigation}) => {
 
     const [text, setText] = useState('')
 
-    const img = 'https://avatars.mds.yandex.net/get-pdb/69339/197e3f26-ca58-43d9-8688-ffcbc94a095c/s1200'
+    const imgRef = useRef()
 
     const saveHandler = () => {
         const post = {
             date: new Date().toJSON(),
             text: text,
-            img: img,
+            img: imgRef.current,
             booked: false
 
         }
         dispatch(addPost(post))
         navigation.navigate('Main')
     }
+
+    const photoPickHandler = (uri) => {
+        imgRef.current = uri
+    }
+
     return (
         <ScrollView>
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss() }>
@@ -37,8 +42,8 @@ export const CreateScreen = ({navigation}) => {
                         onChangeText={setText}
                         multiline
                     />
-                    <PhotoPicker />
-                    <Button title='Создать' color={THEME.MAIN_COLOR} onPress={saveHandler} />
+                    <PhotoPicker onPick={photoPickHandler} />
+                    <Button title='Создать' color={THEME.MAIN_COLOR} onPress={saveHandler} disabled={!text} />
                 </View>
             </TouchableWithoutFeedback>
         </ScrollView>
