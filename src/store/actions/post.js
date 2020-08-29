@@ -12,15 +12,22 @@ export const loadPosts = () => {
     }
 }
 
-export const toogleBooked = (id) => ({
-    type: TOGGLE_BOOKED,
-    payload: id
-})
+export const toogleBooked = (post) => async dispatch => {
+    await DB.updatePost(post)
+    dispatch({
+        type: TOGGLE_BOOKED,
+        payload: post.id
+    })
 
-export const removePost = (id) => ({
-    type: REMOVE_POST,
-    payload: id
-})
+}
+
+export const removePost = (id) => async dispatch => {
+    await DB.removePost(id)
+    dispatch({
+        type: REMOVE_POST,
+        payload: id
+    })
+}
 
 export const addPost = (post) => {
     return async dispatch => {
@@ -36,10 +43,10 @@ export const addPost = (post) => {
             console.log(error)
         }
 
-        const payload = {...post, img: newPath}
+        const payload = { ...post, img: newPath }
         const id = await DB.createPost(payload)
         payload.id = id
-        
+
         dispatch({
             type: ADD_POST,
             payload
