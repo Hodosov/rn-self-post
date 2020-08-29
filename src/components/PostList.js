@@ -22,6 +22,7 @@ export const PostList = ({ data = [], onOpen }) => {
 
 const styles = StyleSheet.create({
     wrapper: {
-        padding: 10
+        paddingTop: 10,
+        height: '100%'
     }
 })

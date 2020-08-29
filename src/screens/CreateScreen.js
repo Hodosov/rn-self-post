@@ -11,23 +11,24 @@ export const CreateScreen = ({navigation}) => {
     const dispatch = useDispatch()
 
     const [text, setText] = useState('')
-
-    const imgRef = useRef()
+    const [photo, setPhoto] = useState(null)
 
     const saveHandler = () => {
         const post = {
             date: new Date().toJSON(),
             text: text,
-            img: imgRef.current,
+            img: photo,
             booked: false
 
         }
         dispatch(addPost(post))
         navigation.navigate('Main')
+        setText('')
+        setPhoto(null)
     }
 
     const photoPickHandler = (uri) => {
-        imgRef.current = uri
+        setPhoto(uri)
     }
 
     return (
@@ -42,7 +43,7 @@ export const CreateScreen = ({navigation}) => {
                         onChangeText={setText}
                         multiline
                     />
-                    <PhotoPicker onPick={photoPickHandler} />
+                    <PhotoPicker onPick={photoPickHandler} photo={photo} />
                     <Button title='Создать' color={THEME.MAIN_COLOR} onPress={saveHandler} disabled={!text} />
                 </View>
             </TouchableWithoutFeedback>
